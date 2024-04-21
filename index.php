@@ -1,3 +1,11 @@
+<?php
+
+    // Conexão com a URL e BD do projeto
+    require_once("globais.php");
+    require_once("db.php");
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
