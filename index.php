@@ -18,7 +18,7 @@
     <!-- FONT AWESOME -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- CSS do projeto -->
-    <link rel="stylesheet" href="<?= $BASE_URL ?>css/style.css">
+    <link rel="stylesheet" href="<?= $BASE_URL ?>/css/style.css">
 </head>
 <body>
     <header>
@@ -50,7 +50,7 @@
     </div>
     <!-- Rodapé -->
     <footer id="footer">
-        <div class="social-container">
+        <div id="social-container">
             <ul>
                 <li>
                     <a href="#"><i class="fab fa-facebook-square"></i></a>
