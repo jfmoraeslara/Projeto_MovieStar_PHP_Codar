@@ -39,7 +39,7 @@
                             <label for="confirmpassword">Confirmação de senha:</label>
                             <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Confirme sua senha">
                         </div>
-                        <input type="submit" name="btn card-btn" value="Registrar">
+                        <input type="submit" class="btn card-btn" value="Registrar">
 
                     </form>
                 </div>
