@@ -26,11 +26,12 @@
             $user->password = $data["password"];
             $user->image = $data["image"];
             $user->bio = $data["bio"];
-            $user->token = $data["token"];
+            $user->token = $data["token"];            
 
             return $user;
 
         }
+        
         public function create(User $user, $authUser = false) {
 
             $stmt = $this->conn->prepare("INSERT INTO users(
@@ -52,12 +53,39 @@
                 $this->setTokenToSession($user->token);
             }
 
+        }        
+
+        public function update(User $user, $redirect = true) {
+            
+            $stmt = $this->conn->prepare("UPDATE users SET
+                name = :name,
+                lastname = :lastname,
+                email = :email,
+                image = :image,
+                bio = :bio,
+                token = :token,
+                WHERE id = :id
+            ");
+
+            $stmt->bindParam(":name", $user->name);
+            $stmt->bindParam(":lastname", $user->lastname);
+            $stmt->bindParam(":email", $user->email);
+            $stmt->bindParam(":image", $user->image);
+            $stmt->bindParam(":bio", $user->bio);
+            $stmt->bindParam(":token", $user->token);
+            $stmt->bindParam(":id", $user->id);
+
+            $stmt->execute();
+
+            if($redirect) {
+
+                // Redireciona para o perfil do usuário
+                $this->message->setMessage("Dados atualizados com sucesso!", "success", "editprofile.php");
+
+            }            
+
         }
-
-        public function update(User $user) {
-
-        }   
-
+        
         public function verifyToken($protected = false) {
 
             if(!empty($_SESSION["token"])) {
@@ -68,7 +96,9 @@
                 $user = $this->findByToken($token);
 
                 if($user) {
+
                     return $user;
+                    
                 } else if($protected) {
 
                     // Redireciona usuário não autenticado
@@ -99,7 +129,34 @@
         }
 
         public function authenticateUser($email, $password) {
-           
+                                    
+            $user = $this->findByEmail($email);
+
+            if($user) {
+
+                // Checar se as senhas batem
+                if(password_verify($password, $user->password)) {
+
+                    // Gerar um token e inserir na seção
+                    $token = $user->generateToken();
+
+                    $this->setTokenToSession($token, false);
+
+                    // Atualizar token do usuário
+                    $user->token = $token;
+
+                    $this->update($user, false);
+
+                    return true;
+
+                } else {
+                    return false;
+                }
+
+
+            } else {
+                return false;
+            }         
 
         }
 
