@@ -34,7 +34,7 @@
 
                     // Criação do token e senha
                     $userToken = $user->generateToken();
-                    $finalPassword = $user->generatePassword($password);
+                    $finalPassword = password_hash($password, PASSWORD_DEFAULT);
 
                     $user->name = $name;
                     $user->lastname = $lastname;
@@ -67,7 +67,7 @@
 
         }
 
-    } else if($type === "login") {
+    } else if($type === "login") {        
 
         $email = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL);
         $password = filter_input(INPUT_POST, "password");

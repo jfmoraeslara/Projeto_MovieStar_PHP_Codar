@@ -56,15 +56,15 @@
         }        
 
         public function update(User $user, $redirect = true) {
-            
+
             $stmt = $this->conn->prepare("UPDATE users SET
-                name = :name,
-                lastname = :lastname,
-                email = :email,
-                image = :image,
-                bio = :bio,
-                token = :token,
-                WHERE id = :id
+            name = :name,
+            lastname = :lastname,
+            email = :email,
+            image = :image,
+            bio = :bio,
+            token = :token
+            WHERE id = :id
             ");
 
             $stmt->bindParam(":name", $user->name);
@@ -77,12 +77,10 @@
 
             $stmt->execute();
 
-            if($redirect) {
-
-                // Redireciona para o perfil do usuário
+            if ($redirect) {
+                //Vai até o perfil do usuário
                 $this->message->setMessage("Dados atualizados com sucesso!", "success", "editprofile.php");
-
-            }            
+            }              
 
         }
         
@@ -129,6 +127,8 @@
         }
 
         public function authenticateUser($email, $password) {
+
+            $user = new User();
                                     
             $user = $this->findByEmail($email);
 
