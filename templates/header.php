@@ -8,9 +8,9 @@
 
     $message = new Message($BASE_URL);
 
-    $flassMessage = $message->getMessage();
+    $flashMessage = $message->getMessage();
 
-    if(!empty($flassMessage["msg"])) {
+    if(!empty($flashMessage["msg"])) {
         // Limpar a mensagem
         $message->clearMessage();
     }
@@ -78,8 +78,8 @@
             </div>
         </nav>
     </header>
-    <?php if(!empty($flassMessage["msg"])): ?>
+    <?php if(!empty($flashMessage["msg"])): ?>
         <div class="msg-container">
-            <p class="msg <?= $flassMessage["type"] ?> "><?= $flassMessage["msg"] ?></p>
+            <p class="msg <?= $flashMessage["type"] ?> "><?= $flashMessage["msg"] ?></p>
         </div>
     <?php endif; ?>
