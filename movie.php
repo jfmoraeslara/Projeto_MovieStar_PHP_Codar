@@ -47,13 +47,13 @@
             $userOwsMovie = true;
         }
 
+        // Resgatar as rewies do filme
+        $alreadyReviewed = $reviewDao->hasAlreadyReviewed($id, $userData->id);
+
     }
 
     // Resgatar as rewies do filme
-    $movieReviews = $reviewDao->getMoviesReview($id);
-
-    // Resgatar as rewies do filme
-    $alreadyReviewed = false;  
+    $movieReviews = $reviewDao->getMoviesReview($movie->id);
 
 ?>
 
