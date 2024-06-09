@@ -121,14 +121,14 @@
                     $rating += $review["rating"];
                 }
 
-                $rating = $rating / count($reviews);
+                $rating = number_format($rating / count($reviews), 1, ",");
 
             } else {
 
                 $rating = "Não avaliado";
 
             }
-
+            
             return $rating;
 
         }
